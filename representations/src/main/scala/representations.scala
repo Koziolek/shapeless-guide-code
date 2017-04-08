@@ -1,3 +1,5 @@
+import shapeless._
+
 final case class Employee(
   name    : String,
   number  : Int,
@@ -16,6 +18,11 @@ object Main extends Demo {
   val employee = Employee("Bill", 1, true)
   val iceCream = IceCream("Cornetto", 0, true)
 
-  // println(employee)
-  // println(iceCream)
+  val genEmplpyee = Generic[Employee]
+
+   println(employee)
+   println(iceCream)
+
+  println(genEmplpyee.to(employee))
+
 }
