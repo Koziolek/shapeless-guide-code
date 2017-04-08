@@ -38,9 +38,9 @@ object CsvEncoder {
   implicit def genericEnc[A, R](
                                  implicit
                                  generic: Generic.Aux[A, R], //Generic[R] = {type Rept = R}
-                                 encoder: CsvEncoder[R]
+                                 encoder: Lazy[CsvEncoder[R]]
                                ): CsvEncoder[A] =
-    pure(a => encoder.encode(generic.to(a)))
+    pure(a => encoder.value.encode(generic.to(a)))
 
   implicit val iceCreamEnc: CsvEncoder[IceCream] =
     pure(iceCream => List(iceCream.name, iceCream.numCherries.toString, iceCream.inCone.toString))
